@@ -1,4 +1,4 @@
-//Checks if an object is empty
+// Checks if an object is empty
 export const isObjEmpty = obj => {
   let objEmpty = true;
   for (var prop in obj) {
@@ -7,9 +7,33 @@ export const isObjEmpty = obj => {
   return objEmpty;
 };
 
+// Checks if a form has invalid text (anything that is not alphanumeric)
+export function handleInvalidForm(name, errName) {
+  let formIsValid = true;
+  let errors = {};
+
+  if (typeof name !== 'undefined') {
+    if (!name.match(/^[a-zA-Z]+$/)) {
+      formIsValid = false;
+      errors[`${errName}`] = `Only letters on the ${errName}form!`;
+    }
+  }
+  return [errors, formIsValid];
+}
+
+// Checks if a form is empty
+export function handleEmptyForm(name, errName) {
+  let formIsValid = true;
+  let errors = {};
+  if (`${name}`) {
+    formIsValid = false;
+    errors[`${errName}`] = `The form field ${errName} cannot be empty!`;
+  }
+  return [errors, formIsValid];
+}
+
 //Handles lightning form validation
-export const handleValidation = state => {
-  let { fields } = state;
+export const handleLightningValidation = ({ fields }) => {
   let formIsValid = true;
   let errors = {};
   //Name validation

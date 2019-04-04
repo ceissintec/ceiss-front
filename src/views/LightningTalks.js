@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-import { handleValidation, isObjEmpty } from '../utils/HandleFormValidation';
-import { NotificationWrapper, ButtonWrapper } from '../styles/StyledComponents';
 import posed from 'react-pose';
-import styled from 'styled-components';
-import CeissAPI from '../api/CeissApi';
 import * as Sentry from '@sentry/browser';
+
+import CeissAPI from '../api/CeissApi';
+import { handleLightningValidation } from '../utils/Validate';
+
+import {
+  NotificationWrapper,
+  ButtonWrapper,
+  Label,
+} from '../styles/StyledComponents';
+
+import ErrorNotification from '../components/ErrorNotification';
+
 // Animated Components
 const Button = posed.div({
   off: {
@@ -22,13 +30,6 @@ const Button = posed.div({
   },
 });
 
-const Label = styled.div`
-  font-family: 'Poppins';
-  font-size: 2em;
-  color: white;
-  margin: 1em 1em 0 0.5em;
-`;
-
 export default class LightningTalks extends Component {
   state = {
     fields: {
@@ -41,30 +42,6 @@ export default class LightningTalks extends Component {
     errors: null,
     hovered: false,
   };
-  //renderErrorList takes the error object, and returns many divs with each error inlined.
-  renderErrorList(errors) {
-    return Object.entries(errors).map(([key, value]) => (
-      <li key={key} className="lightning-error">
-        {value}
-      </li>
-    ));
-  }
-  //renderErrors renders the whole list of errors.
-  renderErrors() {
-    let { errors } = this.state;
-    const errorObjectIsEmpty = isObjEmpty(errors);
-    if (!errors || errorObjectIsEmpty) {
-      return null;
-    }
-
-    const errorList = this.renderErrorList(errors);
-    return (
-      <div className="lightning-notification notification is-danger animated bounce">
-        <h5>Tienes varios errores:</h5>
-        <ul>{errorList}</ul>
-      </div>
-    );
-  }
 
   // handleChange takes the event target name and value, assigns them to the corresponding state property, and sets the new state.
   handleChange = e => {
@@ -76,12 +53,11 @@ export default class LightningTalks extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     //ES6 Destructuring!
-    const [errors, isFormOk] = handleValidation(this.state);
+    const [errors, isFormOk] = handleLightningValidation(this.state);
     this.setState({ errors });
     if (isFormOk) {
       //Make API call to the CEISS Backend
       try {
-        console.log('API Call on state:', this.state);
         const response = await CeissAPI.post(
           'https://bitter-falcon-100.localtunnel.me/api/lightingtalks/submission/',
           {
@@ -106,9 +82,7 @@ export default class LightningTalks extends Component {
             <div className="column">
               <div className="field">
                 <div className="control">
-                  <label className="input-label label">
-                    <Label>Name</Label>
-                  </label>
+                  <Label>Name</Label>
                   <input
                     className="input"
                     type="text"
@@ -121,9 +95,7 @@ export default class LightningTalks extends Component {
               </div>
               <div className="field">
                 <div className="control">
-                  <label className="input-label label">
-                    <Label>Last Name</Label>
-                  </label>
+                  <Label>Last Name</Label>
                   <input
                     className="input"
                     type="text"
@@ -136,9 +108,7 @@ export default class LightningTalks extends Component {
               </div>
               <div className="field">
                 <div className="control">
-                  <label className="input-label label">
-                    <Label>Titulo de tu Lightning Talk</Label>
-                  </label>
+                  <Label>Titulo de tu Lightning Talk</Label>
                   <input
                     className="input"
                     type="text"
@@ -150,9 +120,7 @@ export default class LightningTalks extends Component {
                 </div>
               </div>
               <div className="field">
-                <label className="input-label label">
-                  <Label>De que se trata tu Lightning Talk?</Label>
-                </label>
+                <Label>De que se trata tu Lightning Talk?</Label>
                 <input
                   className="input"
                   name="topic"
@@ -162,9 +130,7 @@ export default class LightningTalks extends Component {
                 />
               </div>
               <div className="control">
-                <label className="input-label label">
-                  <Label>Email</Label>
-                </label>
+                <Label>Email</Label>
                 <input
                   className="input"
                   type="text"
@@ -183,7 +149,9 @@ export default class LightningTalks extends Component {
                   Quiero ser Speaker!
                 </Button>
               </ButtonWrapper>
-              <NotificationWrapper>{this.renderErrors()}</NotificationWrapper>
+              <NotificationWrapper>
+                <ErrorNotification errors={this.state.errors} />
+              </NotificationWrapper>
             </div>
           </form>
         </div>
