@@ -93,7 +93,6 @@ export default class LightningTalks extends Component {
   };
 
   render() {
-    let errors = this.renderErrors();
     return (
       <div className="container is-fluid is-centered">
         <div className="level">

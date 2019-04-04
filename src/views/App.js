@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Router, Route } from 'react-router-dom';
 import History from '../history';
-import MainPage from '../components/MainPage';
+import MainPage from './MainPage';
 import LightningTalks from './LightningTalks';
 import Footer from '../components/Footer';
 
