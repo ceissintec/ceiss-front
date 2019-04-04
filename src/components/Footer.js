@@ -4,7 +4,7 @@ const Footer = () => (
   <div className="footer ceiss-footer">
     <div className="content has-text-centered">
       <p>
-        <strong>CEISS</strong> Mantenido con amor por el Open Source Team de
+        <strong>CEISS - </strong> Mantenido con ❤️ por el Open Source Team de
         INTEC.
       </p>
     </div>
