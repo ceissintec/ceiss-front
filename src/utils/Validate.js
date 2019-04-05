@@ -37,27 +37,27 @@ export const handleLightningValidation = ({ fields }) => {
   let formIsValid = true;
   let errors = {};
   //Name validation
-  if (!fields['name']) {
+  if (!fields['first_name']) {
     formIsValid = false;
-    errors['name'] = 'Your name cannot be empty!';
+    errors['first_name'] = 'Your name cannot be empty!';
   }
 
-  if (typeof fields['name'] !== 'undefined') {
-    if (!fields['name'].match(/^[a-zA-Z]+$/)) {
+  if (typeof fields['first_name'] !== 'undefined') {
+    if (!fields['first_name'].match(/^[a-zA-Z]+$/)) {
       formIsValid = false;
-      errors['name'] = 'Only letters on your first name!';
+      errors['first_name'] = 'Only letters on your first name!';
     }
   }
   //lastName validation
-  if (!fields['lastName']) {
+  if (!fields['last_name']) {
     formIsValid = false;
-    errors['lastName'] = 'Your last name cannot be empty!';
+    errors['last_name'] = 'Your last name cannot be empty!';
   }
 
-  if (typeof fields['lastName'] !== 'undefined') {
-    if (!fields['lastName'].match(/^[a-zA-Z]+$/)) {
+  if (typeof fields['last_name'] !== 'undefined') {
+    if (!fields['last_name'].match(/^[a-zA-Z]+$/)) {
       formIsValid = false;
-      errors['lastName'] = 'Only letters on your last name!';
+      errors['last_name'] = 'Only letters on your last name!';
     }
   }
   //title validation
@@ -66,9 +66,9 @@ export const handleLightningValidation = ({ fields }) => {
     errors['title'] = 'The title cannot be empty!';
   }
   //topic validation
-  if (!fields['topic']) {
+  if (!fields['description']) {
     formIsValid = false;
-    errors['toic'] = 'The topic cannot be empty!';
+    errors['description'] = 'The topic cannot be empty!';
   }
   //Email
   if (!fields['email']) {

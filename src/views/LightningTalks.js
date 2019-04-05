@@ -3,6 +3,7 @@ import posed from 'react-pose';
 import * as Sentry from '@sentry/browser';
 
 import CeissAPI from '../api/CeissApi';
+import axios from 'axios';
 import { handleLightningValidation } from '../utils/Validate';
 
 import {
@@ -33,10 +34,10 @@ const Button = posed.div({
 export default class LightningTalks extends Component {
   state = {
     fields: {
-      name: '',
-      lastname: '',
+      first_name: '',
+      last_name: '',
       title: '',
-      topic: '',
+      description: '',
       email: '',
     },
     errors: null,
@@ -59,13 +60,20 @@ export default class LightningTalks extends Component {
     if (isFormOk) {
       //Make API call to the CEISS Backend
       try {
-        const response = await CeissAPI.post(
+        const response = await fetch(
           'http://104.248.1.88:8000/api/lightingtalks/submission/',
           {
-            params: { query: this.state.fields },
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            mode: 'cors', // no-cors, cors, *same-origin
+            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: 'same-origin', // include, *same-origin, omit
             headers: {
               'Content-Type': 'application/json',
+              // "Content-Type": "application/x-www-form-urlencoded",
             },
+            redirect: 'follow', // manual, *follow, error
+            referrer: 'no-referrer', // no-referrer, *client
+            body: JSON.stringify(this.state.fields), // body data type must match "Content-Type" header
           }
         );
         console.log(response);
@@ -90,7 +98,7 @@ export default class LightningTalks extends Component {
                   <input
                     className="input"
                     type="text"
-                    name="name"
+                    name="first_name"
                     placeholder="Juan"
                     onChange={this.handleChange}
                     value={this.state.name}
@@ -103,7 +111,7 @@ export default class LightningTalks extends Component {
                   <input
                     className="input"
                     type="text"
-                    name="lastName"
+                    name="last_name"
                     placeholder="Perez"
                     onChange={this.handleChange}
                     value={this.state.lastName}
@@ -127,7 +135,7 @@ export default class LightningTalks extends Component {
                 <Label>De que se trata tu Lightning Talk?</Label>
                 <input
                   className="input"
-                  name="topic"
+                  name="description"
                   placeholder="Como asar un platano maduro con JS."
                   onChange={this.handleChange}
                   value={this.state.topic}
