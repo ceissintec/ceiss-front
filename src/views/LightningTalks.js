@@ -43,7 +43,8 @@ export default class LightningTalks extends Component {
     hovered: false,
   };
 
-  // handleChange takes the event target name and value, assigns them to the corresponding state property, and sets the new state.
+  // handleChange takes the event target name and value, assigns them
+  //to the corresponding state property, and sets the new state.
   handleChange = e => {
     let fields = this.state.fields;
     fields[e.target.name] = e.target.value;
@@ -59,9 +60,12 @@ export default class LightningTalks extends Component {
       //Make API call to the CEISS Backend
       try {
         const response = await CeissAPI.post(
-          'https://bitter-falcon-100.localtunnel.me/api/lightingtalks/submission/',
+          'http://104.248.1.88:8000/api/lightingtalks/submission/',
           {
             params: { query: this.state.fields },
+            headers: {
+              'Content-Type': 'application/json',
+            },
           }
         );
         console.log(response);
