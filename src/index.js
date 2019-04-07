@@ -13,5 +13,5 @@ ReactDOM.render(
   <SentryWrapper>
     <App />
   </SentryWrapper>,
-  document.querySelector('#root')
+  document.querySelector('#root'),
 );

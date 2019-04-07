@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import posed from 'react-pose';
 import * as Sentry from '@sentry/browser';
 
-import CeissAPI from '../api/CeissApi';
-import axios from 'axios';
 import { handleLightningValidation } from '../utils/Validate';
 
 import {
@@ -11,7 +9,6 @@ import {
   ButtonWrapper,
   Label,
 } from '../styles/StyledComponents';
-
 import ErrorNotification from '../components/ErrorNotification';
 
 // Animated Components
@@ -63,18 +60,17 @@ export default class LightningTalks extends Component {
         const response = await fetch(
           'http://104.248.1.88:8000/api/lightingtalks/submission/',
           {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            mode: 'cors', // no-cors, cors, *same-origin
-            cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: 'same-origin', // include, *same-origin, omit
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
             headers: {
               'Content-Type': 'application/json',
-              // "Content-Type": "application/x-www-form-urlencoded",
             },
-            redirect: 'follow', // manual, *follow, error
-            referrer: 'no-referrer', // no-referrer, *client
-            body: JSON.stringify(this.state.fields), // body data type must match "Content-Type" header
-          }
+            redirect: 'follow',
+            referrer: 'no-referrer',
+            body: JSON.stringify(this.state.fields),
+          },
         );
         console.log(response);
       } catch (err) {
@@ -157,7 +153,8 @@ export default class LightningTalks extends Component {
                   className="is-centered"
                   onMouseEnter={() => this.setState({ hovered: true })}
                   onMouseLeave={() => this.setState({ hovered: false })}
-                  pose={this.state.hovered ? 'on' : 'off'}>
+                  pose={this.state.hovered ? 'on' : 'off'}
+                >
                   Quiero ser Speaker!
                 </Button>
               </ButtonWrapper>

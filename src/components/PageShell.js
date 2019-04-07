@@ -14,7 +14,8 @@ const PageShell = Page => {
         transitionLeaveTimeout={200}
         transitionName={
           props.match.path === '/lightning-talks' ? 'SlideIn' : 'SlideOut'
-        }>
+        }
+      >
         <Page {...props} />
       </ReactCSSTransitionGroup>
     </div>
