@@ -1,9 +1,11 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
-const LinkWrapper = styled.div.attrs({ className: 'has-text-centered' })`
-  font-family: 'Poppins';
-  font-size: 4em;
-  margin: 1em 0 1em 0;
-`;
+const LinkWrapper = styled.div({
+  className: 'has-text-centered',
+  position: 'relative',
+  zIndex: '2',
+  fontFamily: 'Poppins',
+  fontSize: '0.5em',
+});
 
 export default LinkWrapper;

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 //Wraps a Notification with some styling and margins.
 export const NotificationWrapper = styled.div`
@@ -7,14 +7,14 @@ export const NotificationWrapper = styled.div`
 `;
 
 //Makes a button of type submit and gives it margin.
-export const ButtonWrapper = styled.button.attrs({
+export const ButtonWrapper = styled.button({
   className: 'button is-primary',
   type: 'submit',
 })`
   margin: 1em 1em 1em 1em;
 `;
 
-export const Label = styled.label.attrs({
+export const Label = styled.label({
   className: 'input-label label',
 })`
   font-family: 'Poppins';
@@ -23,13 +23,13 @@ export const Label = styled.label.attrs({
   margin: 1em 1em 0 0.5em;
 `;
 
-export const Banner = styled.h2.attrs({ className: 'has-text-centered' })`
+export const Banner = styled.h2({ className: 'has-text-centered' })`
   font-family: 'Poppins', Helvetica;
   font-size: 8em;
   margin-top: 0em;
 `;
 
-export const LinkWrapper = styled.div.attrs({ className: 'has-text-centered' })`
+export const LinkWrapper = styled.div({ className: 'has-text-centered' })`
   font-family: 'Poppins';
   font-size: 4em;
   margin: 1em 0 1em 0;

@@ -1,12 +1,11 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
-const Label = styled.label.attrs({
+const Label = styled.label({
   className: 'input-label label',
-})`
-  font-family: 'Poppins';
-  font-size: 2em;
-  color: white;
-  margin: 1em 1em 0 0.5em;
-`;
+  fontFamily: 'Poppins',
+  fontSize: '2em',
+  color: 'white',
+  margin: '1em 1em 0 0.5em',
+});
 
 export default Label;

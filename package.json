@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.10",
+    "@emotion/styled": "^10.0.10",
     "@sentry/browser": "^5.0.5",
     "axios": "^0.18.0",
     "node-sass": "^4.11.0",
@@ -10,8 +12,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
-    "react-spring": "^8.0.19",
-    "styled-components": "^4.2.0"
+    "react-spring": "^8.0.19"
   },
   "scripts": {
     "start": "react-scripts start",

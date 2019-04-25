@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 //Wraps a Notification with some styling and margins.
 const NotificationWrapper = styled.div`

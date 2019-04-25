@@ -1,9 +1,10 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
-const Banner = styled.h2.attrs({ className: 'has-text-centered' })`
-  font-family: 'Poppins', Helvetica;
-  font-size: 8em;
-  margin-top: 0em;
+const Banner = styled.h3`
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  z-index: 2;
+  margin-bottom: 25px;
 `;
 
 export default Banner;
