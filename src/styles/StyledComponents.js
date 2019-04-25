@@ -22,3 +22,22 @@ export const Label = styled.label.attrs({
   color: white;
   margin: 1em 1em 0 0.5em;
 `;
+
+export const Banner = styled.h2.attrs({ className: 'has-text-centered' })`
+  font-family: 'Poppins', Helvetica;
+  font-size: 8em;
+  margin-top: 0em;
+`;
+
+export const LinkWrapper = styled.div.attrs({ className: 'has-text-centered' })`
+  font-family: 'Poppins';
+  font-size: 4em;
+  margin: 1em 0 1em 0;
+`;
+
+//Main Page Header is the hero section of the CEISS landing page.
+export const MainPageHeader = styled.div`
+  height: 100vh;
+  display: grid;
+  place-items: center center;
+`;

@@ -4,19 +4,14 @@ import History from '../history';
 import MainPage from './MainPage';
 import LightningTalks from './LightningTalks';
 import Footer from '../components/Footer';
-import PageShell from '../components/PageShell';
 
 export default class App extends Component {
   render() {
     return (
       <Router history={History}>
         <Fragment>
-          <Route path="/" exact component={PageShell(MainPage)} />
-          <Route
-            path="/lightning-talks"
-            exact
-            component={PageShell(LightningTalks)}
-          />
+          <Route path="/" exact component={MainPage} />
+          <Route path="/lightning-talks" exact component={LightningTalks} />
           <Footer />
         </Fragment>
       </Router>

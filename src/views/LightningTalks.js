@@ -1,59 +1,42 @@
-import React, { Component } from 'react';
-import posed from 'react-pose';
+import React, { useState } from 'react';
 import * as Sentry from '@sentry/browser';
-
+// Form validation
 import { handleLightningValidation } from '../utils/Validate';
 
-import {
-  NotificationWrapper,
-  ButtonWrapper,
-  Label,
-} from '../styles/StyledComponents';
+// Components
 import ErrorNotification from '../components/ErrorNotification';
 
-// Animated Components
-const Button = posed.div({
-  off: {
-    opacity: 0.5,
-    scale: 1,
-  },
-  on: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 500,
-      delay: 100,
-    },
-  },
-});
+// Styled Components
+import NotificationWrapper from '../styles/NotificationWrapper';
+import ButtonWrapper from '../styles/ButtonWrapper';
+import Label from '../styles/Label';
 
-export default class LightningTalks extends Component {
-  state = {
-    fields: {
-      first_name: '',
-      last_name: '',
-      title: '',
-      description: '',
-      email: '',
-    },
-    errors: null,
-    hovered: false,
-  };
+export default function LightningTalks() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [email, setEmail] = useState('');
+  const [errors, setErrors] = useState({});
 
-  // handleChange takes the event target name and value, assigns them
-  //to the corresponding state property, and sets the new state.
-  handleChange = e => {
-    let fields = this.state.fields;
-    fields[e.target.name] = e.target.value;
-    this.setState({ fields });
-  };
+  function getFieldValues() {
+    const fields = {
+      fields: {
+        first_name: firstName,
+        last_name: lastName,
+        title,
+        description,
+        email,
+      },
+    };
+    return fields;
+  }
 
-  handleSubmit = async e => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    //ES6 Destructuring!
-    const [errors, isFormOk] = handleLightningValidation(this.state);
-    this.setState({ errors });
+    const fields = getFieldValues();
+    const [formErrors, isFormOk] = handleLightningValidation(fields);
+    setErrors(formErrors);
     if (isFormOk) {
       //Make API call to the CEISS Backend
       try {
@@ -69,7 +52,7 @@ export default class LightningTalks extends Component {
             },
             redirect: 'follow',
             referrer: 'no-referrer',
-            body: JSON.stringify(this.state.fields),
+            body: JSON.stringify(fields),
           },
         );
         console.log(response);
@@ -79,92 +62,83 @@ export default class LightningTalks extends Component {
         }
         Sentry.captureException(err);
       }
+    } else {
+      console.log(errors);
     }
-  };
+  }
 
-  render() {
-    return (
-      <div className="ceiss-lightning">
-        <div className="columns is-centered">
-          <form onSubmit={this.handleSubmit} className="lightning-form">
-            <div className="column">
-              <div className="field">
-                <div className="control">
-                  <Label>Name</Label>
-                  <input
-                    className="input"
-                    type="text"
-                    name="first_name"
-                    placeholder="Juan"
-                    onChange={this.handleChange}
-                    value={this.state.name}
-                  />
-                </div>
-              </div>
-              <div className="field">
-                <div className="control">
-                  <Label>Last Name</Label>
-                  <input
-                    className="input"
-                    type="text"
-                    name="last_name"
-                    placeholder="Perez"
-                    onChange={this.handleChange}
-                    value={this.state.lastName}
-                  />
-                </div>
-              </div>
-              <div className="field">
-                <div className="control">
-                  <Label>Titulo de tu Lightning Talk</Label>
-                  <input
-                    className="input"
-                    type="text"
-                    name="title"
-                    placeholder="PlatanoJS - The Good Stuff"
-                    onChange={this.handleChange}
-                    value={this.state.title}
-                  />
-                </div>
-              </div>
-              <div className="field">
-                <Label>De que se trata tu Lightning Talk?</Label>
-                <input
-                  className="input"
-                  name="description"
-                  placeholder="Como asar un platano maduro con JS."
-                  onChange={this.handleChange}
-                  value={this.state.topic}
-                />
-              </div>
+  return (
+    <div className="ceiss-lightning">
+      <div className="columns is-centered">
+        <form onSubmit={handleSubmit} className="lightning-form">
+          <div className="column">
+            <div className="field">
               <div className="control">
-                <Label>Email</Label>
+                <Label>Name</Label>
                 <input
                   className="input"
                   type="text"
-                  name="email"
-                  placeholder="juanPerez@gmail.com"
-                  onChange={this.handleChange}
-                  value={this.state.email}
+                  name="first_name"
+                  placeholder="Juan"
+                  onChange={e => setFirstName(e.target.value)}
+                  value={firstName}
                 />
               </div>
-              <ButtonWrapper>
-                <Button
-                  className="is-centered"
-                  onMouseEnter={() => this.setState({ hovered: true })}
-                  onMouseLeave={() => this.setState({ hovered: false })}
-                  pose={this.state.hovered ? 'on' : 'off'}
-                >
-                  Quiero ser Speaker!
-                </Button>
-              </ButtonWrapper>
-              <NotificationWrapper>
-                <ErrorNotification errors={this.state.errors} />
-              </NotificationWrapper>
             </div>
-          </form>
-        </div>
+            <div className="field">
+              <div className="control">
+                <Label>Last Name</Label>
+                <input
+                  className="input"
+                  type="text"
+                  name="last_name"
+                  placeholder="Perez"
+                  onChange={e => setLastName(e.target.value)}
+                  value={lastName}
+                />
+              </div>
+            </div>
+            <div className="field">
+              <div className="control">
+                <Label>Titulo de tu Lightning Talk</Label>
+                <input
+                  className="input"
+                  type="text"
+                  name="title"
+                  placeholder="PlatanoJS - The Good Stuff"
+                  onChange={e => setTitle(e.target.value)}
+                  value={title}
+                />
+              </div>
+            </div>
+            <div className="field">
+              <Label>De que se trata tu Lightning Talk?</Label>
+              <input
+                className="input"
+                name="description"
+                placeholder="Como asar un platano maduro con JS."
+                onChange={e => setDescription(e.target.value)}
+                value={description}
+              />
+            </div>
+            <div className="control">
+              <Label>Email</Label>
+              <input
+                className="input"
+                type="text"
+                name="email"
+                placeholder="juanPerez@gmail.com"
+                onChange={e => setEmail(e.target.value)}
+                value={email}
+              />
+            </div>
+            <ButtonWrapper>Quiero ser Speaker!</ButtonWrapper>
+            <NotificationWrapper>
+              <ErrorNotification errors={errors} />
+            </NotificationWrapper>
+          </div>
+        </form>
       </div>
-    );
-  }
+    </div>
+  );
 }
