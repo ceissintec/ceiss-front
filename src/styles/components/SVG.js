@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { HoverAnimation } from './animations';
+import { HoverAnimation } from '../animations';
 
 const SVG = styled.div`
   position: absolute;

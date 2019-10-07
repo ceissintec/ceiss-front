@@ -3,6 +3,7 @@ import { Router, Route } from 'react-router-dom';
 import History from '../history';
 import MainPage from './MainPage';
 import Footer from '../components/Footer';
+
 const LightningTalks = lazy(() => import('./LightningTalks'));
 
 function LoadableTalks() {

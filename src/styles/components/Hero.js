@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { IntroAnimation } from './animations';
+import { IntroAnimation } from '../animations';
 
 const Hero = styled.div`
   height: 100vh;

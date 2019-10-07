@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './views/App';
 import { init } from '@sentry/browser';
+import App from './views/App';
 import './styles/app.scss';
 import SentryWrapper from './components/SentryWrapper';
 

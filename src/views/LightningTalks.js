@@ -7,9 +7,9 @@ import { handleLightningValidation } from '../utils/Validate';
 import ErrorNotification from '../components/ErrorNotification';
 
 // Styled Components
-import NotificationWrapper from '../styles/NotificationWrapper';
-import ButtonWrapper from '../styles/ButtonWrapper';
-import Label from '../styles/Label';
+import NotificationWrapper from '../styles/components/NotificationWrapper';
+import ButtonWrapper from '../styles/components/ButtonWrapper';
+import Label from '../styles/components/Label';
 
 export default function LightningTalks() {
   const [firstName, setFirstName] = useState('');
@@ -38,7 +38,7 @@ export default function LightningTalks() {
     const [formErrors, isFormOk] = handleLightningValidation(fields);
     setErrors(formErrors);
     if (isFormOk) {
-      //Make API call to the CEISS Backend
+      // Make API call to the CEISS Backend
       try {
         const response = await fetch(
           'http://104.248.1.88:8000/api/lightingtalks/submission/',

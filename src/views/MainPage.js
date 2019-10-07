@@ -2,17 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 // styled components
-import Hero from '../styles/Hero';
-import Banner from '../styles/Banner';
-import LinkWrapper from '../styles/LinkWrapper';
-import SVG from '../styles/SVG';
-import RotatingDiv from '../styles/RotatingDiv';
+import Hero from '../styles/components/Hero';
+import Banner from '../styles/components/Banner';
+import LinkWrapper from '../styles/components/LinkWrapper';
+import SVG from '../styles/components/SVG';
+import RotatingDiv from '../styles/components/RotatingDiv';
 //Assets
 import ReactLogo from '../res/react-logo.svg';
 import VueLogo from '../res/vue-logo.svg';
 import KuberLogo from '../res/kuber-logo.svg';
 
-// const
 function MainPage() {
   return (
     <>
